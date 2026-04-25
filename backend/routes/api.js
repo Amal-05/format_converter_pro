@@ -60,10 +60,11 @@ router.post('/convert', upload.array('files'), async (req, res) => {
                 throw new Error('Invalid category selected');
             }
 
+            const baseUrl = `${req.protocol}://${req.get('host')}`;
             convertedFiles.push({
                 originalName: file.originalname,
                 convertedName: path.basename(resultPath),
-                downloadUrl: `http://localhost:3000/api/download/${path.basename(resultPath)}`
+                downloadUrl: `${baseUrl}/api/download/${path.basename(resultPath)}`
             });
             
             // Clean up original uploaded file
