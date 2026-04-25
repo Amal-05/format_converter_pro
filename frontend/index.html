@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Format Converter Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body>
+    <div id="app">
+      <nav class="navbar">
+        <div class="logo">
+          <i data-lucide="zap"></i> Format Converter Pro
+        </div>
+        <div class="nav-links">
+          <button class="nav-btn active" data-target="home">Home</button>
+          <button class="nav-btn" data-target="contact">Contact Us</button>
+          <div class="nav-separator"></div>
+          <button id="theme-toggle" class="theme-toggle" title="Toggle Theme">
+            <i data-lucide="sun" id="theme-icon"></i>
+          </button>
+        </div>
+      </nav>
+
+      <main class="container">
+        
+        <!-- Home View -->
+        <section id="home" class="view active">
+          <div class="hero">
+            <h1>Ultimate File Transformation</h1>
+            <p>Convert your images, videos, and documents with precision. Strict category processing ensures perfect results.</p>
+          </div>
+          
+          <div class="category-grid">
+            <div class="card glass-card category-card" data-category="image">
+              <div class="card-icon image-gradient">
+                <i data-lucide="image"></i>
+              </div>
+              <h2>Image Converter</h2>
+              <p>JPG, PNG, WebP, GIF & more. Resize and batch convert.</p>
+            </div>
+            
+            <div class="card glass-card category-card" data-category="video">
+              <div class="card-icon video-gradient">
+                <i data-lucide="video"></i>
+              </div>
+              <h2>Video Converter</h2>
+              <p>MP4, MKV, AVI, MOV & more. Trim and extract metadata.</p>
+            </div>
+            
+            <div class="card glass-card category-card" data-category="document">
+              <div class="card-icon document-gradient">
+                <i data-lucide="file-text"></i>
+              </div>
+              <h2>Document Converter</h2>
+              <p>Word, Spreadsheets, Presentations & eBooks. PDF, DOCX, XLSX, EPUB & more.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Converter View -->
+        <section id="converter" class="view hidden">
+          <button class="back-btn"><i data-lucide="arrow-left"></i> Back to Categories</button>
+          
+          <div class="converter-layout">
+            
+            <div class="glass-card upload-section">
+              <div class="converter-header">
+                <div class="category-indicator"></div>
+                <h2 id="converter-title">Converter</h2>
+              </div>
+              
+              <div id="dropzone" class="dropzone">
+                <i data-lucide="upload-cloud" class="upload-icon"></i>
+                <p>Drag & Drop files here</p>
+                <span>or</span>
+                <button class="btn primary-btn" id="browse-btn">Browse Files</button>
+                <input type="file" id="file-input" multiple hidden>
+              </div>
+
+              <div id="file-list" class="file-list hidden">
+                <!-- Selected files will appear here -->
+              </div>
+            </div>
+
+            <div class="glass-card settings-section">
+              <h3>Conversion Settings</h3>
+              
+              <div class="form-group">
+                <label>Output Format</label>
+                <select id="format-select" class="glass-input">
+                  <!-- Formats populated dynamically -->
+                </select>
+              </div>
+
+              <div id="category-settings" class="category-settings">
+                <!-- Image Settings -->
+                <div id="image-settings" class="setting-group hidden">
+                  <div class="form-group row">
+                    <div>
+                      <label>Width (px)</label>
+                      <input type="number" id="img-width" class="glass-input" placeholder="Auto">
+                    </div>
+                    <div>
+                      <label>Height (px)</label>
+                      <input type="number" id="img-height" class="glass-input" placeholder="Auto">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Video Settings -->
+                <div id="video-settings" class="setting-group hidden">
+                  <div class="form-group row">
+                    <div>
+                      <label>Start Time (s)</label>
+                      <input type="number" id="vid-start" class="glass-input" placeholder="0">
+                    </div>
+                    <div>
+                      <label>End Time (s)</label>
+                      <input type="number" id="vid-end" class="glass-input" placeholder="Full length">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Document Settings -->
+                <div id="document-settings" class="setting-group hidden">
+                   <p class="settings-hint">No extra settings for this conversion type.</p>
+                   <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; border-radius: 4px;">
+                     <p style="color: #fca5a5; font-size: 0.85rem; margin: 0;">
+                       <i data-lucide="alert-triangle" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 5px;"></i>
+                       <strong>Warning:</strong> Some document conversions may degrade formatting depending on the target format.
+                     </p>
+                   </div>
+                </div>
+              </div>
+
+              <button id="convert-btn" class="btn action-btn disabled">Convert Files</button>
+              
+              <!-- Progress UI -->
+              <div id="progress-container" class="hidden">
+                <div class="progress-bar-bg">
+                  <div id="progress-bar" class="progress-bar-fill"></div>
+                </div>
+                <p id="progress-text">Converting...</p>
+              </div>
+
+            </div>
+          </div>
+          
+          <div id="result-section" class="glass-card result-section hidden">
+            <h3>Download Results</h3>
+            <div id="result-list" class="result-list"></div>
+          </div>
+
+        </section>
+
+        <!-- Contact View -->
+        <section id="contact" class="view hidden">
+          <div class="glass-card" style="max-width: 600px; margin: 0 auto; padding: 3rem;">
+            <h2 style="margin-bottom: 1rem; font-size: 2rem;">Contact Us</h2>
+            <p style="margin-bottom: 2rem; color: var(--text-secondary);">Have a question or facing an issue? Reach out to us.</p>
+            <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+              <input type="hidden" name="access_key" value="3a2cc10f-51dd-4a6d-92ae-ff374eaa2b90">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" class="glass-input" placeholder="Your Name" required>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="glass-input" placeholder="Your Email" required>
+              </div>
+              <div class="form-group">
+                <label>Message</label>
+                <textarea name="message" class="glass-input" rows="5" placeholder="How can we help?" required></textarea>
+              </div>
+              <button type="submit" class="btn action-btn">Send Message</button>
+            </form>
+          </div>
+        </section>
+
+      </main>
+      
+      <footer style="text-align: center; padding: 2rem; color: var(--text-secondary); font-size: 0.95rem;">
+        Made with ❤️ by Amal
+      </footer>
+
+      <div id="toast" class="toast hidden">Message</div>
+    </div>
+    
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
