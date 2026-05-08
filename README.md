@@ -1,5 +1,11 @@
 # Format Converter Pro
 
+<div align="center">
+  <a href="https://your-deployed-website.vercel.app" target="_blank">
+    <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=700&size=28&pause=1000&color=3B82F6&center=true&vCenter=true&width=500&lines=✨+Click+Here+to+View+Live+Website+✨;🚀+Try+Format+Converter+Pro+Now;⚡+Fast,+Private,+%26+Secure" alt="Animated Live Website Button" />
+  </a>
+</div>
+
 A powerful, category-based file converter supporting images, videos, and complex document formats. It uses WebAssembly (WASM) for secure client-side image and video conversions, and a robust Node.js backend for advanced document processing.
 
 ## Features
