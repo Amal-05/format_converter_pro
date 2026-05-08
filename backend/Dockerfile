@@ -1,9 +1,11 @@
 FROM node:18-bullseye
 
-# Install LibreOffice and FFmpeg
+# Install LibreOffice, FFmpeg, Java (required for some conversions), and standard fonts
 RUN apt-get update && apt-get install -y \
     libreoffice \
     ffmpeg \
+    default-jre \
+    fonts-liberation \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
